@@ -94,6 +94,10 @@ var resourceTemplate = `
           description: Bad request
           schema:
             $ref: '#/definitions/Error'
+        422:
+          description: Unprocessable entity
+          schema:
+            $ref: '#/definitions/Error'
 		
         500:
           description: Internal server error
@@ -137,6 +141,10 @@ var resourceTemplate = `
             $ref: '#/definitions/Error'
         404:
           description: Not found
+        422:
+          description: Unprocessable entity
+          schema:
+            $ref: '#/definitions/Error'
         500:
           description: Internal server error
     put:
@@ -161,6 +169,10 @@ var resourceTemplate = `
             $ref: '#/definitions/Error'
         404:
           description: Not found
+        422:
+          description: Unprocessable entity
+          schema:
+            $ref: '#/definitions/Error'
         500:
           description: Internal server error
     delete:
