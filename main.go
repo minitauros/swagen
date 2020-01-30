@@ -15,7 +15,7 @@ import (
 
 type Config struct {
 	DB struct {
-		DNS string
+		DSN string
 	}
 	Service   swagger.ServiceInfo
 	Resources map[string]swagger.Resource // Table name => resource
@@ -41,7 +41,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	db, err := sql.Open("mysql", conf.DB.DNS)
+	db, err := sql.Open("mysql", conf.DB.DSN)
 	if err != nil {
 		log.Fatal(err)
 	}

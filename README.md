@@ -25,7 +25,7 @@ You will need to create a small config file that Swagen uses to generate YML. Fo
 
 ```
 db:
-  dns: user:password@tcp(host:port)/db_name?parseTime=true
+  dsn: user:password@tcp(host:port)/db_name?parseTime=true
 
 service:
   name: MyService
@@ -64,7 +64,7 @@ Config:
 
 ```
 db:
-  dns: root:@tcp(0.0.0.0:3306)/products?parseTime=true
+  dsn: root:@tcp(0.0.0.0:3306)/products?parseTime=true
 
 service:
   name: TestService
