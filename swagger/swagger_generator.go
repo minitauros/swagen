@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"database/sql"
 	"fmt"
+	"strings"
 	"text/template"
 
 	sql2 "github.com/minitauros/swagen/sql"
@@ -184,7 +185,7 @@ func (g *Generator) generateResources() ([]Resource, error) {
 			})
 		}
 
-		resource.Path = tableName
+		resource.Path = strings.ReplaceAll(tableName, "_", "-")
 		resource.Definition.Fields = fields
 
 		resources = append(resources, resource)

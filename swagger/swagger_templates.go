@@ -41,6 +41,16 @@ definitions:
     properties:
       message:
         type: string
+  Principal:
+    type: object
+    description: Security principal for validating that a user is authorized to execute certain actions
+    properties:
+      userId:
+        type: string
+      permissions:
+        type: array
+        items:
+          type: string
 `
 
 var resourceTemplate = `
@@ -76,8 +86,10 @@ var resourceTemplate = `
         200:
           description: Success
           schema:
-            description: The ID of the {{ .Title }} that was created
-            type: integer
+            properties:
+              id:
+                type: integer
+                description: The ID of the {{ .Title }} that was created
         400:
           description: Bad request
           schema:
@@ -165,8 +177,7 @@ var resourceTemplate = `
         404:
           description: Not found
         500:
-          description: Internal server error
-`
+          description: Internal server error`
 
 var definitionTemplate = `
   {{ .Name }}:
