@@ -64,8 +64,9 @@ type (
 
 	// DefinitionField is a field of a definition.
 	DefinitionField struct {
-		Name string
-		Type FieldType
+		Name       string
+		Type       FieldType
+		IsNullable bool
 	}
 
 	// FieldType describes the type of a (definition) field.
@@ -179,9 +180,16 @@ func (g *Generator) generateResources() ([]Resource, error) {
 			if err != nil {
 				return nil, err
 			}
+
+			isNullable, ok := col.Nullable()
+			if !ok {
+				return nil, errors.New("not ok")
+			}
+
 			fields = append(fields, DefinitionField{
-				Name: col.Name(),
-				Type: fieldType,
+				Name:       col.Name(),
+				Type:       fieldType,
+				IsNullable: isNullable,
 			})
 		}
 

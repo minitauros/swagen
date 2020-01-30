@@ -188,6 +188,9 @@ var definitionTemplate = `
         {{- if $field.Type.ExtraProperties }}
           {{- range $key, $value := $field.Type.ExtraProperties }}
         {{ $key }}: {{ $value }}
-          {{- end -}}
-        {{ end -}}
-      {{ end }}`
+          {{- end }}
+        {{- end }}
+		{{- if $field.IsNullable }}
+        x-nullable: true
+		{{- end }}
+      {{- end }}`
