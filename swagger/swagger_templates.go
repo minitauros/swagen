@@ -57,7 +57,7 @@ var resourceTemplate = `
   /{{ .Path }}:
     get:
       operationId: Get{{ .Definition.Name }}s
-      summary: Returns the {{ .Title }} resources with the given IDs, or all of them if no IDs are given
+      summary: Returns the {{ .Title }} resources with the given IDs, or all of them if no IDs are given.
       parameters:
         - in: query
           name: ids
@@ -75,7 +75,7 @@ var resourceTemplate = `
           description: Internal server error
     post:
       operationId: Create{{ .Definition.Name }}
-      summary: Creates a {{ .Title }}
+      summary: Creates a {{ .Title }}.
       parameters:
         - name: resource
           in: body
@@ -104,7 +104,7 @@ var resourceTemplate = `
   /{{ .Path }}/{id}:
     get:
       operationId: Get{{ .Definition.Name }}
-      summary: Returns the {{ .Title }} with the given ID
+      summary: Returns the {{ .Title }} with the given ID.
       parameters:
         - in: path
           name: id
@@ -121,7 +121,7 @@ var resourceTemplate = `
           description: Internal server error
     patch:
       operationId: Patch{{ .Definition.Name }}
-      summary: Patches the {{ .Title }} with the given ID
+      summary: Patches the {{ .Title }} with the given ID.
       parameters:
         - name: id
           in: path
@@ -149,7 +149,7 @@ var resourceTemplate = `
           description: Internal server error
     put:
       operationId: Put{{ .Definition.Name }}
-      summary: Replaces the {{ .Title }} with the given ID
+      summary: Replaces the {{ .Title }} with the given ID.
       parameters:
         - name: id
           in: path
@@ -177,7 +177,7 @@ var resourceTemplate = `
           description: Internal server error
     delete:
       operationId: Delete{{ .Definition.Name }}
-      summary: Deletes the {{ .Title }} with the given ID
+      summary: Deletes the {{ .Title }} with the given ID.
       parameters:
         - name: id
           in: path
