@@ -64,6 +64,14 @@ var resourceTemplate = `
           type: array
           items:
             type: integer
+        - in: query
+          name: limit
+          type: integer
+          description: For limiting the number of results. Not applied if IDs are given.
+        - in: query
+          name: offset
+          type: integer
+          description: For limiting the number of results. Only applied if limit is given. Not applied if IDs are given.
       responses:
         200:
           description: List of {{ .Title }} resources
