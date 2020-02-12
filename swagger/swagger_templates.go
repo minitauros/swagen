@@ -13,6 +13,13 @@ consumes:
 produces:
   - application/json
 paths:
+  /health-check:
+    get:
+      operationId: HealthCheck
+      description: Returns 200 if the service is healthy.
+      responses:
+        200:
+          description: Healthy
   {{- .Resources }}
 definitions:
   {{- .Definitions }}
