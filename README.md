@@ -25,11 +25,11 @@ You will need to create a small config file that Swagen uses to generate YML. Fo
 
 ```
 db:
-  dsn: user:password@tcp(host:port)/db_name?parseTime=true
+  dsn: root:@tcp(127.0.0.1:3306)/db_name
 
 service:
   name: MyService
-  host: 1.1.1.1:1234
+  host: 127.0.0.1:1234
 
 resources:
   table_name:

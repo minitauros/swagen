@@ -113,7 +113,6 @@ var resourceTemplate = `
           description: Unprocessable entity
           schema:
             $ref: '#/definitions/Error'
-		
         500:
           description: Internal server error
   /{{ .Path }}/{id}:
