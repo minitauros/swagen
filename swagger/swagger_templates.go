@@ -96,7 +96,7 @@ var resourceTemplate = `
           in: body
           required: true
           schema:
-            $ref: '#/definitions/{{ .Definition.Name }}'
+            $ref: '#/definitions/{{ .Definition.Name }}Input'
       responses:
         200:
           description: Success
@@ -173,7 +173,7 @@ var resourceTemplate = `
           in: body
           required: true
           schema:
-            $ref: '#/definitions/{{ .Definition.Name }}'
+            $ref: '#/definitions/{{ .Definition.Name }}Input'
       responses:
         200:
           description: Success
@@ -219,4 +219,20 @@ var definitionTemplate = `
 		{{- if $field.IsNullable }}
         x-nullable: true
 		{{- end }}
+      {{- end }}
+  {{ .Name }}Input:
+    properties:
+      {{- range $index, $field := .Fields }}
+        {{- if ne $field.Name "id" }}
+      {{ $field.Name }}:
+        type: {{ $field.Type.Name }}
+        {{- if $field.Type.ExtraProperties }}
+          {{- range $key, $value := $field.Type.ExtraProperties }}
+        {{ $key }}: {{ $value }}
+          {{- end }}
+        {{- end }}
+		{{- if $field.IsNullable }}
+        x-nullable: true
+		{{- end }}
+        {{- end }}
       {{- end }}`
