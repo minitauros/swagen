@@ -89,6 +89,14 @@ func getTypeFromSqlColumnType(col *sql.ColumnType) (FieldType, error) {
 		return FieldType{"string", map[string]string{
 			"format": "date-time",
 		}}, nil
+	case "DATE":
+		return FieldType{"string", map[string]string{
+			"format": "date",
+		}}, nil
+	case "TIMESTAMP":
+		return FieldType{"string", map[string]string{
+			"format": "date-time",
+		}}, nil
 	case "TINYINT":
 		return FieldType{"boolean", map[string]string{
 			"format": "int64",
