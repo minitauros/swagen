@@ -20,6 +20,8 @@ paths:
       responses:
         200:
           description: Healthy
+        500:
+          description: Not healthy
   {{- .Resources }}
 definitions:
   {{- .Definitions }}
