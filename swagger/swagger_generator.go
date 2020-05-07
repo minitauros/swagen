@@ -3,7 +3,6 @@ package swagger
 import (
 	"bytes"
 	"database/sql"
-	"fmt"
 	"strings"
 	"text/template"
 
@@ -77,44 +76,44 @@ type (
 )
 
 // getTypeFromSqlColumnType returns the field type for the given SQL column.
-func getTypeFromSqlColumnType(col *sql.ColumnType) (FieldType, error) {
+func getTypeFromSqlColumnType(col *sql.ColumnType) FieldType {
 	switch col.DatabaseTypeName() {
 	case "VARCHAR":
-		return FieldType{"string", nil}, nil
+		return FieldType{"string", nil}
 	case "TEXT":
-		return FieldType{"string", nil}, nil
+		return FieldType{"string", nil}
 	case "CHAR":
-		return FieldType{"string", nil}, nil
+		return FieldType{"string", nil}
 	case "DATETIME":
 		return FieldType{"string", map[string]string{
 			"format": "date-time",
-		}}, nil
+		}}
 	case "DATE":
 		return FieldType{"string", map[string]string{
 			"format": "date",
-		}}, nil
+		}}
 	case "TIMESTAMP":
 		return FieldType{"string", map[string]string{
 			"format": "date-time",
-		}}, nil
+		}}
 	case "TINYINT":
 		return FieldType{"boolean", map[string]string{
 			"format": "int64",
-		}}, nil
+		}}
 	case "SMALLINT":
 		return FieldType{"integer", map[string]string{
 			"format": "int64",
-		}}, nil
+		}}
 	case "INT":
 		return FieldType{"integer", map[string]string{
 			"format": "int64",
-		}}, nil
+		}}
 	case "BIGINT":
 		return FieldType{"integer", map[string]string{
 			"format": "int64",
-		}}, nil
+		}}
 	}
-	return FieldType{}, errors.WithStack(fmt.Errorf("type " + col.DatabaseTypeName() + " not supported"))
+	return FieldType{col.DatabaseTypeName() + " [unsupported by swagen]", nil}
 }
 
 // Generate generates the Swagger YML, which is returned as a string.
@@ -182,21 +181,16 @@ func (g *Generator) generateResources() ([]Resource, error) {
 			return nil, err
 		}
 
-		var fields []DefinitionField
+		fields := make([]DefinitionField, 0, len(cols))
 		for _, col := range cols {
-			fieldType, err := getTypeFromSqlColumnType(col)
-			if err != nil {
-				return nil, err
-			}
-
 			isNullable, ok := col.Nullable()
 			if !ok {
-				return nil, errors.New("not ok")
+				return nil, errors.New("cannot find out if column is nullable or not")
 			}
 
 			fields = append(fields, DefinitionField{
 				Name:       col.Name(),
-				Type:       fieldType,
+				Type:       getTypeFromSqlColumnType(col),
 				IsNullable: isNullable,
 			})
 		}
