@@ -229,9 +229,15 @@ var definitionTemplate = `
 		{{- end }}
       {{- end }}
   {{ .Name }}Input:
+    required:
+    {{- range $index, $field := .Fields }}
+      {{- if and (ne $field.Name "id") (not $field.IsNullable) }}
+      - {{ $field.Name }}
+      {{- end }}
+    {{- end }}
     properties:
       {{- range $index, $field := .Fields }}
-        {{- if ne $field.Name "id" }}
+        {{- if  ne $field.Name "id" }}
       {{ $field.Name }}:
         type: {{ $field.Type.Name }}
         {{- if $field.Type.ExtraProperties }}
