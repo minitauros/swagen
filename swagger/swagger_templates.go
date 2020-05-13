@@ -67,24 +67,17 @@ var resourceTemplate = `
     get:
       operationId: Get{{ .Definition.Name }}s
       summary: Get {{ .Title }}s
-      description: Returns the {{ .Title }} resources with the given IDs, or all of them if no IDs are given.
+      description: Returns all {{ .Title }} resources.
       parameters:
-        - in: query
-          name: ids
-          type: array
-          items:
-            type: integer
         - in: query
           name: limit
           type: integer
-          description: For limiting the number of results. Not applied if IDs are given.
         - in: query
           name: offset
           type: integer
-          description: For limiting the number of results. Only applied if limit is given. Not applied if IDs are given.
       responses:
         200:
-          description: List of {{ .Title }} resources
+          description: List of {{ .Title }} resources.
           schema:
             type: array
             items:
@@ -108,7 +101,7 @@ var resourceTemplate = `
             properties:
               id:
                 type: integer
-                description: The ID of the {{ .Title }} that was created
+                description: The ID of the {{ .Title }} that was created.
         400:
           description: Bad request
           schema:
@@ -117,6 +110,26 @@ var resourceTemplate = `
           description: Unprocessable entity
           schema:
             $ref: '#/definitions/Error'
+        500:
+          description: Internal server error
+  /{{ .Path }}/batch:
+    get:
+      operationId: Get{{ .Definition.Name }}sByID
+      summary: Get {{ .Title }}sByID
+      description: Returns the {{ .Title }} resources with the given IDs.
+      parameters:
+        - in: query
+          name: ids
+          type: array
+          items:
+            type: integer
+      responses:
+        200:
+          description: List of {{ .Title }} resources
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/{{ .Definition.Name }}'
         500:
           description: Internal server error
   /{{ .Path }}/{id}:
