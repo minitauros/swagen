@@ -95,8 +95,8 @@ var resourceTemplate = `
           schema:
             $ref: '#/definitions/{{ .Definition.Name }}Input'
       responses:
-        200:
-          description: Success
+        201:
+          description: Created
           schema:
             properties:
               id:
