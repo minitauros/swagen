@@ -115,7 +115,7 @@ var resourceTemplate = `
   /{{ .Path }}/batch:
     get:
       operationId: Get{{ .Definition.Name }}sByID
-      summary: Get {{ .Title }}sByID
+      summary: Get {{ .Title }}s by ID
       description: Returns the {{ .Title }} resources with the given IDs.
       parameters:
         - in: query
@@ -135,7 +135,7 @@ var resourceTemplate = `
   /{{ .Path }}/{id}:
     get:
       operationId: Get{{ .Definition.Name }}
-      summary: Get {{ .Title }}
+      summary: Get {{ .Title }} by ID
       description: Returns the {{ .Title }} with the given ID.
       parameters:
         - in: path
