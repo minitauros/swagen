@@ -33,7 +33,6 @@ definitions:
       required:
         - op
         - path
-        - value
       properties:
         op:
           type: string
