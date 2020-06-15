@@ -47,6 +47,10 @@ definitions:
   Error:
     type: object
     properties:
+      code:
+        type: integer
+        format: int64
+        x-nullable: true
       message:
         type: string
   Principal:
