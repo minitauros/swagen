@@ -110,6 +110,10 @@ func getTypeFromSqlColumnType(col *sql.ColumnType) FieldType {
 		return FieldType{"integer", map[string]string{
 			"format": "int64",
 		}}
+	case "DECIMAL":
+		return FieldType{"number", map[string]string{
+			"format": "float64",
+		}}
 	}
 	return FieldType{col.DatabaseTypeName() + " [unsupported by swagen]", nil}
 }
