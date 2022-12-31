@@ -243,6 +243,7 @@ var definitionTemplate = `
 		{{- if $field.IsNullable }}
         x-nullable: true
 		{{- end }}
+        x-order: {{$index}}
       {{- end }}
   {{ .Name }}Input:
     required:
@@ -264,5 +265,6 @@ var definitionTemplate = `
 		{{- if $field.IsNullable }}
         x-nullable: true
 		{{- end }}
+        x-order: {{$index}}
         {{- end }}
       {{- end }}`
