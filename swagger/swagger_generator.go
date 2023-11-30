@@ -100,17 +100,29 @@ func getTypeFromSqlColumnType(col *sql.ColumnType) FieldType {
 		return FieldType{"boolean", nil}
 	case "SMALLINT":
 		return FieldType{"integer", map[string]string{
-			"format": "int64",
+			"format": "int32",
+		}}
+	case "UNSIGNED SMALLINT":
+		return FieldType{"integer", map[string]string{
+			"format": "uint32",
 		}}
 	case "INT":
 		return FieldType{"integer", map[string]string{
 			"format": "int64",
+		}}
+	case "UNSIGNED INT":
+		return FieldType{"integer", map[string]string{
+			"format": "uint64",
 		}}
 	case "BIGINT":
 		return FieldType{"integer", map[string]string{
 			"format": "int64",
 		}}
 	case "DECIMAL":
+		return FieldType{"number", map[string]string{
+			"format": "float64",
+		}}
+	case "FLOAT":
 		return FieldType{"number", map[string]string{
 			"format": "float64",
 		}}
